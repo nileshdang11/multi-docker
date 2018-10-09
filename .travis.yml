@@ -1,6 +1,6 @@
 sudo: required
 services:
-  - dokcer
+  - docker
 
 before_install:
   - docker build -t nileshdang/multi-docker-react -f ./client/Dockerfile.dev ./client
@@ -13,9 +13,7 @@ after-success:
   - docker build -t nileshdang/multi-docker-nginx ./nginx
   - docker build -t nileshdang/multi-docker-worker ./worker
   - docker build -t nileshdang/multi-docker-server ./server
-  #login in to docker hub / artifcatory
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # push teh image there
   - docker push nileshdang/multi-docker-client
   - docker push nileshdang/multi-docker-worker
   - docker push nileshdang/multi-docker-nginx
